@@ -15,11 +15,7 @@ import cl.duoc.msContrato.dto.ContratoDTO;
 @RequestMapping("/api/contratos")
 public class ContratoController {
 
-    private final ContratoService contratoService;
-
-    public ContratoController(ContratoService contratoService) {
-        this.contratoService = contratoService;
-    }
+    private ContratoService contratoService;
 
     @GetMapping
     public ResponseEntity<List<Contrato>> listar() {
@@ -28,12 +24,18 @@ public class ContratoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Contrato> obtenerPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(contratoService.getbyId(id));
+        try{
+            Contrato contrato = service.
+            return ResponseEntity.ok();
     }
 
     @PostMapping
-    public ResponseEntity<Contrato> crear(@RequestBody ContratoDTO contratoDTO) {
-        Contrato nuevoContrato = contratoService.guardarContrato(contrato);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoContrato);
+    public ResponseEntity<Contrato> GuardarContrato(@RequestBody Contrato contrato) {
+        try{
+            Contrato nuevoContrato = contratoService.guardarContrato(contrato);
+            return ResponseEntity.OK(nuevoContrato);
+        }catch (Exception e){
+            return RespondeEntity.notFound().build();
+        }
     }
 }
