@@ -1,0 +1,31 @@
+package cl.duoc.msContrato.model;
+
+import jakarta.annotation.Generated;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "contratos")
+public class Contrato {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(nullable = false)
+    private String numContrato;
+
+    @Column(nullable = false)
+    private String clienteId;
+
+    @column(nullable = false)
+    private String fechaInicio;
+
+    @Column(nullable = false)
+    private String fechaFin;
+
+
+}
