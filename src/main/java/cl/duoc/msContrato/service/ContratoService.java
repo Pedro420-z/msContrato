@@ -51,13 +51,7 @@ public class ContratoService {
 
     private ClienteClient clienteClient;
     
-    public Contrato crearContrato(Contrato contrato) {
-        if (clienteClient.verificarClienteExiste(contrato.getClienteId())) {
-            return contratoRepo.save(contrato);
-        } else {
-            throw new RuntimeException("Cliente no existe");
-        }
-    }
+    
 
 
 }
