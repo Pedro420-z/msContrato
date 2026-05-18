@@ -15,7 +15,7 @@ public class ContratoDTO {
     private String fechaFin;
     private Double monto;
     private String estado;
-    private ClienteDTO cliente;
+    private ReservaDTO reserva;
 
 }
 

@@ -3,6 +3,7 @@ package cl.duoc.msContrato.controller;
 import cl.duoc.msContrato.model.Contrato;
 import cl.duoc.msContrato.service.ContratoService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import cl.duoc.msContrato.dto.ContratoDTO;
 @RequestMapping("/api/contratos")
 public class ContratoController {
 
+    @Autowired
     private ContratoService contratoService;
 
     @GetMapping

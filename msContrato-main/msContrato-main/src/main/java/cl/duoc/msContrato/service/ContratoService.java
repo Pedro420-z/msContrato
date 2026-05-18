@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cl.duoc.msContrato.client.ClienteClient;
-import cl.duoc.msContrato.dto.ClienteDTO;
+import cl.duoc.msContrato.client.ReservaClient;
 import cl.duoc.msContrato.dto.ContratoDTO;
+import cl.duoc.msContrato.dto.ReservaDTO;
 import cl.duoc.msContrato.model.Contrato;
 import cl.duoc.msContrato.repository.ContratoRepository;
 
@@ -18,7 +18,9 @@ public class ContratoService {
     private ContratoRepository contratoRepo;
 
     @Autowired
-    private ClienteClient clienteClient;
+    private ReservaClient reservaClient;
+
+    
 
 
     public List<Contrato> listarContratos() {
@@ -58,10 +60,18 @@ public class ContratoService {
     public ContratoDTO obtenerDetallesContrato(Integer id){
         Contrato contrato = contratoRepo.findById(id).orElseThrow(() -> new RuntimeException("contrato no encontrado"));
 
-        ClienteDTO cliente = clienteClient.obtenerClienteDTO(id);
+        ReservaDTO reserva = reservaClient.ObtenerReservaCompleta(id);
+        
+
         ContratoDTO contratoCompleto = new ContratoDTO();
-        contratoCompleto.setCliente(cliente);
         contratoCompleto.setNumeroContrato(contrato.getNumContrato());
+        contratoCompleto.setClienteId(contrato.getClienteId());
+        contratoCompleto.setFechaInicio(contrato.getFechaInicio());
+        contratoCompleto.setFechaFin(contrato.getFechaFin());
+        contratoCompleto.setMonto(contrato.getMonto());
+        contratoCompleto.setEstado(contrato.getEstado());
+
+        contratoCompleto.setReserva(reserva);
 
         return contratoCompleto;
     
