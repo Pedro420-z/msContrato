@@ -19,7 +19,7 @@ public class ContratoController {
     @GetMapping
     public ResponseEntity<List<Contrato>> listar() {
         try{
-            Contrato contrato = service.ListarContratos();
+            Contrato contrato = contratoService.listarContratos();
             return ResponseEntity.ok(contrato);
         }catch(Exception e){
             return ResponseEntity.notFound().build();
@@ -29,8 +29,8 @@ public class ContratoController {
     @GetMapping("/{id}")
     public ResponseEntity<Contrato> obtenerPorId(@PathVariable Integer id) {
         try{
-            Contrato contrato = service.buscarContrato(id);
-            return ResponseEntity.ok();
+            Contrato contrato = contratoService.buscarContrato(id);
+            return ResponseEntity.ok(contrato);
         } catch(Exception e){
             return ResponseEntity.notFound().build();
         }
@@ -46,5 +46,23 @@ public class ContratoController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
+    public ResponseEntity<Contrato> actualizarContrato(@PathVariable Integer id, @RequestBody Contrato contratoActualizado){
+        try {
+            Contrato contrato = contratoService.actualizarContrato(id, contratoActualizado);
+            return ResponseEntity.ok(contrato);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/detalle/{id}")
+    public ResponseEntity<ContratoDTO> detalleMantenimientoDTO(@PathVariable Integer id){
+        try {
+            ContratoDTO contratoDTO = contratoService.obtenerDetallesContrato(id);
+            return ResponseEntity.ok(contratoDTO);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
